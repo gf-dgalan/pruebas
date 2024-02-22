@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bienvenida y Juego de Piedra, Papel o Tijera</title>
+  <style>
+    .motivation {
+      font-size: 24px;
+      margin-bottom: 10px;
+      background-image: linear-gradient(to right, #ff0000, #00ff00, #0000ff);
+      animation: gradient 20s infinite;
+    }
+
+    @keyframes gradient {
+      from {
+        background-position: 0% 0%;
+      }
+      to {
+        background-position: 100% 100%;
+      }
+    }
+  </style>
+  <script>
+    var motivationMessages = [
+      "¡Bienvenido! Nunca es tarde para empezar.",
+      "¡Hola! El éxito comienza con la voluntad de intentarlo.",
+      "¡Hola, amigo! No te rindas, el comienzo es siempre lo más difícil.",
+      "¡Hola! El único lugar donde el éxito viene antes que el trabajo es en el diccionario.",
+      "¡Hola! Elige un trabajo que te guste y no tendrás que trabajar ni un día de tu vida."
+    ];
+
+    var currentMotivationIndex = 0;
+    var timer;
+
+    function startTimer() {
+      timer = setInterval(changeMotivation, 6000);
+    }
+
+    function stopTimer() {
+      clearInterval(timer);
+    }
+
+    function changeMotivation() {
+      currentMotivationIndex = (currentMotivationIndex + 1) % motivationMessages.length;
+      document.getElementById("motivationMessage").innerHTML = motivationMessages[currentMotivationIndex];
+    }
+
+    function playGame(userChoice) {
+      var choices = ["piedra", "papel", "tijera"];
+      var randomIndex = Math.floor(Math.random() * choices.length);
+      var computerChoice = choices[randomIndex];
+
+      var result;
+
+      if (userChoice === computerChoice) {
+        result = "Empate";
+      } else if (
+        (userChoice === "piedra" && computerChoice === "tijera") ||
+        (userChoice === "papel" && computerChoice === "piedra") ||
+        (userChoice === "tijera" && computerChoice === "papel")
+      ) {
+        result = "¡Ganaste!";
+      } else {
+        result = "Perdiste";
+      }
+
+      document.getElementById("gameResult").innerHTML = "Elegiste: " + userChoice + "<br>La máquina eligió: " + computerChoice + "<br>Resultado: " + result;
+    }
+  </script>
+</head>
+<body>
+  <h1>Bienvenido</h1>
+  <div class="motivation" id="motivationMessage">¡Bienvenido! Nunca es tarde para empezar.</div>
+  <div>
+    <button onclick="startTimer()">Iniciar</button>
+    <button onclick="stopTimer()">Detener</button>
+  </div>
+  <br>
+  <h2>Juego de Piedra, Papel o Tijera</h2>
+  <div>
+    <button onclick="playGame('piedra')">Piedra</button>
+    <button onclick="playGame('papel')">Papel</button>
+    <button onclick="playGame('tijera')">Tijera</button>
+  </div>
+  <div id="gameResult"></div>
+  <br>
+  <h2>Formulario de Contacto</h2>
+  <form>
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="nombre" required><br><br>
+    <label for="telefono">Número de Teléfono:</label>
+    <input type="tel" id="telefono" name="telefono" required><br><br>
+    <label for="mensaje">Mensaje:</label><br>
+    <textarea id="mensaje" name="mensaje" rows="4" cols="50" required></textarea><br><br>
+    <input type="submit" value="Enviar">
+  </form>
+</body>
+</html>

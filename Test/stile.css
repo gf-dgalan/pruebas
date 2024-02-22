@@ -1,0 +1,15 @@
+.motivation {
+    font-size: 24px;
+    margin-bottom: 10px;
+    background-image: linear-gradient(to right, #ff0000, #00ff00, #0000ff);
+    animation: gradient 20s infinite;
+  }
+  
+  @keyframes gradient {
+    from {
+      background-position: 0% 0%;
+    }
+    to {
+      background-position: 100% 100%;
+    }
+  }
